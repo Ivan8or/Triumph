@@ -1,0 +1,15 @@
+main: online.umbcraft.triumph.game.Triumph
+name: Triumph
+version: 1.0.0
+author: Ivan8or
+description: A persistent, kit-customizing minigame
+prefix: Triumph
+api-version: 1.15
+depend: [LuckPerms, TAB]
+commands:
+    triumph:
+        description: the main command for the plugin
+        usage: 
+        permission: triumph.admin
+        permission-message: You can't run that command! Silly player!
+  

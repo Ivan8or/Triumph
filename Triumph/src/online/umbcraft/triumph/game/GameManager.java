@@ -6,7 +6,6 @@ a smooth transition between games for the player
 
  */
 
-
 package online.umbcraft.triumph.game;
 
 import java.util.ArrayList;
@@ -104,12 +103,8 @@ public class GameManager {
 		}
 		return prefix + num_on;
 	}
-	public void startNewGame(TriumphMapData map) {
-		
-	}
-
-	public void stopGame(TriumphGame game_to_stop) {
-
+	public Map<String, TriumphPlayer> getAllOnline() {
+		return all_online;
 	}
 	
 	public void unloadAllWorlds() {

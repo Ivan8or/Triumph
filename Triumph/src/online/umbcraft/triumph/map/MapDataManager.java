@@ -50,7 +50,7 @@ public class MapDataManager {
 	// recursive function that returns all maps which come close to matching the amount of players who are ready to play
 	private List<TriumphMapData> getSuitableMaps(int num_players, int num_maps, int max_off_by) {
 		List<TriumphMapData> all_suited = new ArrayList<TriumphMapData>();
-		if(num_maps == 0 || max_off_by >= 4)
+		if(num_maps == 0 || max_off_by >= 8)
 			return all_suited;
 
 		for(TriumphMapData next_map : maps) 

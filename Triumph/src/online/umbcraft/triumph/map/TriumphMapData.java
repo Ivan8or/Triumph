@@ -87,6 +87,8 @@ public class TriumphMapData {
 		}
 		else {
 			map_name = map_world_name;
+			min_size = 2;
+			max_size = 16;
 		}
 		readBeaconLocations();
 		readSelectorLocations();

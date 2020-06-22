@@ -10,7 +10,9 @@ import online.umbcraft.triumph.listeners.TriumphBuilderListener;
 import online.umbcraft.triumph.listeners.TriumphCommandExecutor;
 import online.umbcraft.triumph.listeners.TriumphKitSelectorListener;
 import online.umbcraft.triumph.listeners.TriumphPlayerJoinListener;
+import online.umbcraft.triumph.listeners.TriumphPlayerLeaveListener;
 import online.umbcraft.triumph.listeners.TriumphPowerupListener;
+import online.umbcraft.triumph.listeners.TriumphEditInventoryListener;
 import online.umbcraft.triumph.listeners.TriumphPlayerDeathListener;
 import online.umbcraft.triumph.listeners.TriumphTeamSelectorListener;
 
@@ -40,7 +42,6 @@ public class Triumph extends JavaPlugin {
 	
 	private void registerListeners() {
 		getCommand("triumph").setExecutor(new TriumphCommandExecutor(this));
-		
 		Bukkit.getServer().getPluginManager().registerEvents(
 				new TriumphAbilityListener(this), this);
 		Bukkit.getServer().getPluginManager().registerEvents(
@@ -55,5 +56,9 @@ public class Triumph extends JavaPlugin {
 				new TriumphPlayerDeathListener(this), this);
 		Bukkit.getServer().getPluginManager().registerEvents(
 				new TriumphBuilderListener(this), this);
+		Bukkit.getServer().getPluginManager().registerEvents(
+				new TriumphEditInventoryListener(this), this);
+		Bukkit.getServer().getPluginManager().registerEvents(
+				new TriumphPlayerLeaveListener(this), this);
 	}
 }

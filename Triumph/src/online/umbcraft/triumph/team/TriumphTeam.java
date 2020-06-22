@@ -48,9 +48,14 @@ public class TriumphTeam {
 		players.add(p);
 	}
 	public synchronized void removePlayer(TriumphPlayer p) {
+		System.out.println("TriumphTeam removing a player!");
+		for(TriumphPlayer pp: players)
+			System.out.println("has: "+pp.getPlayer().getName());
+		System.out.println("--------------");
 		if(players.contains(p)) {
-			p.setTeam(null);
+			p.setTeam(TeamColor.NONE);
 			players.remove(p);
+			System.out.println("removing "+p.getPlayer().getName());
 		}
 	}
 

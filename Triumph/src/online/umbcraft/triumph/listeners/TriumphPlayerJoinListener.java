@@ -22,6 +22,7 @@ public class TriumphPlayerJoinListener implements Listener{
 	public void onPlayerJoin(PlayerJoinEvent e) {
 		Player new_player = e.getPlayer();
 		plugin.getGameManager().addTriumphPlayer(new_player);
+		e.setJoinMessage(null);
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL)

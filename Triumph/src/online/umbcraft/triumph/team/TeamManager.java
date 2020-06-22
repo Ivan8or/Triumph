@@ -30,6 +30,13 @@ public class TeamManager {
 				teams.add(new TriumphTeam(plugin, this, new_loc.getColor()));
 		}
 	}
+	public List<TriumphPlayer> getAllPlayers() {
+		List<TriumphPlayer> to_return = new ArrayList<TriumphPlayer>();
+		for(TriumphTeam t: teams)
+			to_return.addAll(t.getPlayers());
+		
+		return to_return;
+	}
 	public TriumphTeamSpawnManager getSpawnManager() {
 		return spawnManager;
 	}

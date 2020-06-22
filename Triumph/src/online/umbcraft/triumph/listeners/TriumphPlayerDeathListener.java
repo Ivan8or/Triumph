@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -13,7 +12,6 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.scheduler.BukkitScheduler;
 
 import online.umbcraft.triumph.game.Triumph;
-import online.umbcraft.triumph.game.TriumphGame;
 import online.umbcraft.triumph.player.TriumphPlayer;
 
 public class TriumphPlayerDeathListener implements Listener{
@@ -38,10 +36,10 @@ public class TriumphPlayerDeathListener implements Listener{
 			seconds_till_respawn = 0;
 
 		BukkitScheduler scheduler = plugin.getServer().getScheduler();
-		if(p.getLocation().getY() < 1 || !(t_p.getLobby() instanceof TriumphGame))
-			t_p.getLobby().getTeamManager().getSpawnManager().respawnPlayer(t_p);
+		if(p.getLocation().getY() < 1)
+			t_p.respawn();
 		
-		else if(dead_players.get(p.getPlayer().getUniqueId()+"") == null)
+		if(dead_players.get(p.getPlayer().getUniqueId()+"") == null)
 				dead_players.put(p.getPlayer().getUniqueId()+"", 
 						scheduler.scheduleSyncRepeatingTask(
 								plugin,new DeathSpectatorRunnable(t_p,seconds_till_respawn),0,20));
@@ -51,10 +49,12 @@ public class TriumphPlayerDeathListener implements Listener{
 		private TriumphPlayer p;
 		private int seconds_left;
 		public DeathSpectatorRunnable(TriumphPlayer p, int seconds) {
-			p.getPlayer().setGameMode(GameMode.SPECTATOR);
+			
 			this.p = p;
-			if(seconds > 0)
+			if(seconds > 0) {
+				p.setDead(true);
 				sendMessage();
+			}
 			seconds_left = seconds;
 
 		}
@@ -64,13 +64,11 @@ public class TriumphPlayerDeathListener implements Listener{
 		@Override
 		public void run() {
 			if(seconds_left <= 0) {
-				p.getPlayer().setGameMode(GameMode.ADVENTURE);
-				p.getPlayer().setHealth(20);
-				p.getPlayer().setFireTicks(0);
-				p.getPlayer().setFoodLevel(20);
-				p.getLobby().getTeamManager().getSpawnManager().respawnPlayer(p);
+				p.getPlayer().sendTitle(ChatColor.YELLOW+"Respawned!","",2,15,5);
 				plugin.getServer().getScheduler().cancelTask(dead_players.get(p.getPlayer().getUniqueId()+""));
 				dead_players.remove(p.getPlayer().getUniqueId()+"");
+				p.setDead(false);
+				p.respawn();
 			}
 			else {
 				sendMessage();
